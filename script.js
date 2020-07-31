@@ -43,15 +43,31 @@ for (var hour = 9; hour < 18; hour++) {
     var columnTwo = $("<div>");
     columnTwo.addClass("col-md-9");
 
+    //Create text input box inside column two
+    var textInput = $("<input>");
+    textInput.addClass("textarea");
+    textInput.attr("type", "text");
+    columnTwo.append(textInput);
+
     var columnThree = $("<div>");
     columnThree.addClass("col-md-1");
+
+    //create save button and push items to local storage
+    var saveButton = $("<button>");
+    saveButton.addClass("saveBtn");
+    saveButton.on("click", function() {
+        storedPlans = textInput.value();
+        localStorage.setItem("storedPlans", storedPlans);
+    })
+    columnThree.append(saveButton);
+
 
     //append columns and rows to container
     plannerRow.append(columnOne);
     plannerRow.append(columnTwo);
     plannerRow.append(columnThree);
-    $(".container").append(plannerRow);
+    plannerContainer.append(plannerRow);
 }
-
+//end of for loop
 
 
