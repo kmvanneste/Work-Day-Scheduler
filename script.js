@@ -1,17 +1,7 @@
-//Today's Date:
+// //Today's Date:
 $(document).ready(function() {
     $("#currentDay").text(moment().format('MMMM Do YYYY'));
-})
-
-//Global Variables
-var plannerContainer = $(".container");
-// var saveIcon = <i class="far fa-save"> </i>;
-
-//Saving input to local storage
-var storedPlans = JSON.parse(localStorage.getItem("storedPlans"));
-
-//Clear existing elements in container
-plannerContainer.empty();
+});
 
 //Create 9 rows
 for (var hour = 9; hour < 18; hour++) {
@@ -36,7 +26,6 @@ for (var hour = 9; hour < 18; hour++) {
         displayHour = hour;
         ampm = "am";
     }
-    console.log(ampm);
     workTime.text(displayHour + " " + ampm);
     columnOne.append(workTime);
 
@@ -46,6 +35,7 @@ for (var hour = 9; hour < 18; hour++) {
     //Create text input box inside column two
     var textInput = $("<input>");
     textInput.addClass("textarea");
+    textInput.addClass("form-control");
     textInput.attr("type", "text");
     columnTwo.append(textInput);
 
@@ -54,19 +44,27 @@ for (var hour = 9; hour < 18; hour++) {
 
     //create save button and push items to local storage
     var saveButton = $("<button>");
-    saveButton.addClass("saveBtn");
-    saveButton.on("click", function() {
-        storedPlans = textInput.value();
-        localStorage.setItem("storedPlans", storedPlans);
-    })
-    columnThree.append(saveButton);
+    saveButton.addClass("saveBtn i:hover");
+    saveButton.addClass("btn");
+    saveButton.addClass("far fa-save");
 
+    saveButton.on("click", function() {
+        var userText = textInput.value().trim();
+
+        if (userText !== null){
+        var storedPlans = JSON.parse(localStorage.getItem("storedPlans")) || [];
+        storedPlans.push(userText);
+        localStorage.setItem("storedPlans", JSON.stringify(storedPlans));
+        }
+    })
+
+    columnThree.append(saveButton);
 
     //append columns and rows to container
     plannerRow.append(columnOne);
     plannerRow.append(columnTwo);
     plannerRow.append(columnThree);
-    plannerContainer.append(plannerRow);
+    $(".container").append(plannerRow);
 }
 //end of for loop
 
