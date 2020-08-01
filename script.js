@@ -2,6 +2,10 @@
 $(document).ready(function() {
     $("#currentDay").text(moment().format('MMMM Do YYYY'));
 })
+//Global Variables
+var currentTime = moment().format('h');
+console.log(currentTime);
+
 //Create 9 rows
 for (var theHour = 9; theHour < 18; theHour++) {
     index = theHour - 9;
@@ -35,22 +39,30 @@ for (var theHour = 9; theHour < 18; theHour++) {
     columnTwo.addClass("col-md-9");
 
     //Create text input box inside column two
-    var textInput = $("<textarea>");
+    var textInput = $("<input>");
     textInput.addClass("textarea form-control");
-    // textInput.attr("type", "text");
+    textInput.attr("type", "text");
     textInput.attr("id", index);
     columnTwo.append(textInput);
+
+    //Changing Color boxes due to time of day
+    if (currentTime < displayHour) {
+        textInput.addClass("future");
+    } else if (currentTime = displayHour) {
+        textInput.addClass("present");
+    } else {
+        textInput.addClass("past");
+    }
 
     var columnThree = $("<div>");
     columnThree.addClass("col-md-1");
 
     //create save button
     var saveButton = $("<button>");
-    saveButton.attr("id", [theHour]);
+    saveButton.attr("id", theHour);
     saveButton.addClass("btn saveBtn i:hover far fa-save fa-2x")
     columnThree.append(saveButton);
 
-    
     //append columns and rows to container
     plannerRow.append(columnOne);
     plannerRow.append(columnTwo);
@@ -58,32 +70,27 @@ for (var theHour = 9; theHour < 18; theHour++) {
     $(".container").append(plannerRow);
 }
 //end of for loop
-    
+
+
 //Button Functions to push to local storage
 $("#9").on("click", function() {
     userText = {
-        line1: $("#0").val(),
+        line1: $("#0").val()
     }
-    var value = JSON.parse(localStorage.getItem("value")) || [];
-    value.push(userText);
-    localStorage.setItem("value", JSON.stringify(value));
+    localStorage.setItem("value", JSON.stringify(userText));
 })
 
 $("#10").on("click", function() {
     userText = {
         line2: $("#1").val(),
     }
-    var value = JSON.parse(localStorage.getItem("value")) || [];
-    value.push(userText);
-    localStorage.setItem("value", JSON.stringify(value));
+    localStorage.setItem("value", JSON.stringify(userText));
 })
 
 $("#11").on("click", function() {
     userText = {
         line3: $("#2").val(),
     }
-    var value = JSON.parse(localStorage.getItem("value")) || [];
-    value.push(userText);
     localStorage.setItem("value", JSON.stringify(value));
 })
 
@@ -91,8 +98,6 @@ $("#12").on("click", function() {
     userText = {
         line4: $("#3").val(),
     }
-    var value = JSON.parse(localStorage.getItem("value")) || [];
-    value.push(userText);
     localStorage.setItem("value", JSON.stringify(value));
 })
 
@@ -100,8 +105,6 @@ $("#13").on("click", function() {
     userText = {
         line5: $("#4").val(),
     }
-    var value = JSON.parse(localStorage.getItem("value")) || [];
-    value.push(userText);
     localStorage.setItem("value", JSON.stringify(value));
 })
 
@@ -109,8 +112,6 @@ $("#14").on("click", function() {
     userText = {
         line6: $("#5").val(),
     }
-    var value = JSON.parse(localStorage.getItem("value")) || [];
-    value.push(userText);
     localStorage.setItem("value", JSON.stringify(value));
 })
 
@@ -118,25 +119,25 @@ $("#15").on("click", function() {
     userText = {
         line7: $("#6").val(),
     }
-    var value = JSON.parse(localStorage.getItem("value")) || [];
-    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
+})
+
+$("#16").on("click", function() {
+    userText = {
+        line8: $("#7").val(),
+    }
     localStorage.setItem("value", JSON.stringify(value));
 })
 
 $("#17").on("click", function() {
     userText = {
-        line9: $("#7").val(),
+        line9: $("#8").val(),
     }
-    var value = JSON.parse(localStorage.getItem("value")) || [];
-    value.push(userText);
+    // var value = JSON.parse(localStorage.getItem("value")) || [];
+    // value.push(userText);
     localStorage.setItem("value", JSON.stringify(value));
 })
 
-$("#18").on("click", function() {
-    userText = {
-        line8: $("#8").val(),
-    }
-    var value = JSON.parse(localStorage.getItem("value")) || [];
-    value.push(userText);
-    localStorage.setItem("value", JSON.stringify(value));
-})
+$("#0").val(JSON.parse(localStorage.getItem("0")));
+
+//change background color depending on time

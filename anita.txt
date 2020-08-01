@@ -4,10 +4,10 @@ $(document).ready(function() {
          // Grab users input 
          
          var value = $(this).siblings(".reservation").val();
+          //grab the corresponding time
           
-          /grab the corresponding time
-
           var time = $(this).parent().attr("id")
+          
           localStorage.setItem(time, value);
           });
           
