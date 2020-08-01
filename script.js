@@ -1,29 +1,29 @@
 // //Today's Date:
 $(document).ready(function() {
     $("#currentDay").text(moment().format('MMMM Do YYYY'));
-});
 
 //Create 9 rows
-for (var hour = 9; hour < 18; hour++) {
+for (var theHour = 9; theHour < 18; theHour++) {
     var plannerRow = $("<div>");
-    plannerRow.attr("row-number", [hour]);
+    plannerRow.attr("row-number", [theHour]);
     plannerRow.addClass("row");
+    plannerRow.attr("id", [theHour]);
   
     //Create 3 columns in each row
     var columnOne = $("<div>");
     columnOne.addClass("col-md-2");
-    columnOne.addClass("timeCol");
+    columnOne.addClass("mx-auto timeCol");
 
     //Create Time Element
     var workTime = $("<p>");
-    workTime.addClass("time-block");
+    workTime.addClass("time-block hour");
     var displayHour = 0;
     var ampm = "";
-    if (hour > 12) {
-        displayHour = hour - 12;
+    if (theHour > 12) {
+        displayHour = theHour - 12;
         ampm = "pm";
     } else {
-        displayHour = hour;
+        displayHour = theHour;
         ampm = "am";
     }
     workTime.text(displayHour + " " + ampm);
@@ -37,26 +37,31 @@ for (var hour = 9; hour < 18; hour++) {
     textInput.addClass("textarea");
     textInput.addClass("form-control");
     textInput.attr("type", "text");
+
     columnTwo.append(textInput);
 
     var columnThree = $("<div>");
     columnThree.addClass("col-md-1");
 
-    //create save button and push items to local storage
+    //create save button and push to local storage
     var saveButton = $("<button>");
     saveButton.addClass("saveBtn i:hover");
     saveButton.addClass("btn");
     saveButton.addClass("far fa-save");
 
     saveButton.on("click", function() {
-        var userText = textInput.value().trim();
-
-        if (userText !== null){
-        var storedPlans = JSON.parse(localStorage.getItem("storedPlans")) || [];
-        storedPlans.push(userText);
-        localStorage.setItem("storedPlans", JSON.stringify(storedPlans));
-        }
+        var userText = textInput.val()
+        
+        if (userText !== ""){
+        var value = JSON.parse(localStorage.getItem("value")) || [];
+        var textObj = {
+            textInput: textInput.val()
+        };
+        value.push(textObj);
+        localStorage.setItem("value", JSON.stringify(value));
+    }
     })
+    // $(".textarea").val(localStorage.getItem(".textarea"));
 
     columnThree.append(saveButton);
 
@@ -68,4 +73,15 @@ for (var hour = 9; hour < 18; hour++) {
 }
 //end of for loop
 
+
+
+//     if (userText !== null){
+//     var storedPlans = localStorage.getItem("storedPlans") || [];
+//     storedPlans.push(userText);
+//     localStorage.setItem("storedPlans", JSON.stringify(storedPlans));
+//     }
+// });
+
+
+})
 
