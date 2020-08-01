@@ -4,6 +4,8 @@ $(document).ready(function() {
 
 //Create 9 rows
 for (var theHour = 9; theHour < 18; theHour++) {
+    index = theHour - 9;
+
     var plannerRow = $("<div>");
     plannerRow.attr("row-number", [theHour]);
     plannerRow.addClass("row");
@@ -36,8 +38,7 @@ for (var theHour = 9; theHour < 18; theHour++) {
     var textInput = $("<input>");
     textInput.addClass("textarea form-control");
     textInput.attr("type", "text");
-    textInput.attr("id", "text-input")
-
+    textInput.attr("id", index);
     columnTwo.append(textInput);
 
     var columnThree = $("<div>");
@@ -45,23 +46,35 @@ for (var theHour = 9; theHour < 18; theHour++) {
 
     //create save button and push to local storage
     var saveButton = $("<button>");
-    saveButton.addClass("btn saveBtn i:hover far fa-save");
-
-    saveButton.on("click", function() {
-        var userText = $("#text-Input").val()
-        
-        if (userText !== ""){
-        var value = JSON.parse(localStorage.getItem("value")) || [];
-        var textObj = {
-            textInput: textInput.val()
-        };
-        value.push(textObj);
-        localStorage.setItem("value", JSON.stringify(value));
-    }
-    })
-    // $(".textarea").val(localStorage.getItem(".textarea"));
-
+    saveButton.attr("id", theHour);
+    saveButton.addClass("btn saveBtn i:hover far fa-save fa-2x")
     columnThree.append(saveButton);
+
+    $("#theHour").on("click", function() {
+    
+        function saveText() {
+            var userText = $(".textarea").val();
+                
+                if (userText !== "") {
+                    var value = JSON.parse(localStorage.getItem("value")) || [];
+                    var textObj = {
+                        textInput: userText
+                    };
+                    value.push(textObj);
+                    localStorage.setItem("value", JSON.stringify(value));
+                }
+            }
+        
+        function printText() {
+            var value = JSON.parse(localStorage.getItem("value")) || [];
+            return value;
+            }
+
+            saveText();
+            
+
+
+    })
 
     //append columns and rows to container
     plannerRow.append(columnOne);
@@ -70,6 +83,14 @@ for (var theHour = 9; theHour < 18; theHour++) {
     $(".container").append(plannerRow);
 }
 //end of for loop
+    
+//Functions
+
+
+
+
+
+
 
 })
 
