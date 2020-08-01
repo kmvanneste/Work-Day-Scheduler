@@ -4,6 +4,9 @@ $(document).ready(function() {
 })
 //Global Variables
 var currentTime = moment().format('h');
+var currentTime = parseInt(currentTime);
+var currentAmPm = moment().format('a');
+console.log(currentAmPm);
 console.log(currentTime);
 
 //Create 9 rows
@@ -11,9 +14,9 @@ for (var theHour = 9; theHour < 18; theHour++) {
     index = theHour - 9;
 
     var plannerRow = $("<div>");
-    plannerRow.attr("row-number", [theHour]);
+    // plannerRow.attr("row-number", [theHour]);
     plannerRow.addClass("row");
-    plannerRow.attr("id", [theHour]);
+    // plannerRow.attr("id", [theHour]);
   
     //Create 3 columns in each row
     var columnOne = $("<div>");
@@ -28,6 +31,9 @@ for (var theHour = 9; theHour < 18; theHour++) {
     if (theHour > 12) {
         displayHour = theHour - 12;
         ampm = "pm";
+    } else if (theHour === 12) {
+        displayHour = theHour;
+        ampm = "pm"
     } else {
         displayHour = theHour;
         ampm = "am";
@@ -43,16 +49,31 @@ for (var theHour = 9; theHour < 18; theHour++) {
     textInput.addClass("textarea form-control");
     textInput.attr("type", "text");
     textInput.attr("id", index);
-    columnTwo.append(textInput);
-
+   
     //Changing Color boxes due to time of day
-    if (currentTime < displayHour) {
+    var colorTime = currentTime + 12;
+    var colorTime = parseInt(colorTime);
+    console.log(currentTime);
+    console.log(displayHour);
+    console.log(colorTime);
+    if (currentTime < displayHour && ampm === "am") {
+        console.log("green");
         textInput.addClass("future");
-    } else if (currentTime = displayHour) {
+    } else if (currentTime === displayHour) {
+        console.log("red");
+        textInput.addClass("present");
+    } else if (currentTime === displayHour) {
+        console.log("red");
+        textInput.addClass("present");
+    } else if (currentTime === displayHour) {
+        console.log("red");
         textInput.addClass("present");
     } else {
         textInput.addClass("past");
+        console.log("blue");
     }
+
+    columnTwo.append(textInput);
 
     var columnThree = $("<div>");
     columnThree.addClass("col-md-1");
