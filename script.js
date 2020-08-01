@@ -1,7 +1,7 @@
 // //Today's Date:
 $(document).ready(function() {
     $("#currentDay").text(moment().format('MMMM Do YYYY'));
-
+})
 //Create 9 rows
 for (var theHour = 9; theHour < 18; theHour++) {
     index = theHour - 9;
@@ -35,47 +35,22 @@ for (var theHour = 9; theHour < 18; theHour++) {
     columnTwo.addClass("col-md-9");
 
     //Create text input box inside column two
-    var textInput = $("<input>");
+    var textInput = $("<textarea>");
     textInput.addClass("textarea form-control");
-    textInput.attr("type", "text");
+    // textInput.attr("type", "text");
     textInput.attr("id", index);
     columnTwo.append(textInput);
 
     var columnThree = $("<div>");
     columnThree.addClass("col-md-1");
 
-    //create save button and push to local storage
+    //create save button
     var saveButton = $("<button>");
-    saveButton.attr("id", theHour);
+    saveButton.attr("id", [theHour]);
     saveButton.addClass("btn saveBtn i:hover far fa-save fa-2x")
     columnThree.append(saveButton);
 
-    $("#theHour").on("click", function() {
     
-        function saveText() {
-            var userText = $(".textarea").val();
-                
-                if (userText !== "") {
-                    var value = JSON.parse(localStorage.getItem("value")) || [];
-                    var textObj = {
-                        textInput: userText
-                    };
-                    value.push(textObj);
-                    localStorage.setItem("value", JSON.stringify(value));
-                }
-            }
-        
-        function printText() {
-            var value = JSON.parse(localStorage.getItem("value")) || [];
-            return value;
-            }
-
-            saveText();
-            
-
-
-    })
-
     //append columns and rows to container
     plannerRow.append(columnOne);
     plannerRow.append(columnTwo);
@@ -84,13 +59,84 @@ for (var theHour = 9; theHour < 18; theHour++) {
 }
 //end of for loop
     
-//Functions
-
-
-
-
-
-
-
+//Button Functions to push to local storage
+$("#9").on("click", function() {
+    userText = {
+        line1: $("#0").val(),
+    }
+    var value = JSON.parse(localStorage.getItem("value")) || [];
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
 })
 
+$("#10").on("click", function() {
+    userText = {
+        line2: $("#1").val(),
+    }
+    var value = JSON.parse(localStorage.getItem("value")) || [];
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
+})
+
+$("#11").on("click", function() {
+    userText = {
+        line3: $("#2").val(),
+    }
+    var value = JSON.parse(localStorage.getItem("value")) || [];
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
+})
+
+$("#12").on("click", function() {
+    userText = {
+        line4: $("#3").val(),
+    }
+    var value = JSON.parse(localStorage.getItem("value")) || [];
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
+})
+
+$("#13").on("click", function() {
+    userText = {
+        line5: $("#4").val(),
+    }
+    var value = JSON.parse(localStorage.getItem("value")) || [];
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
+})
+
+$("#14").on("click", function() {
+    userText = {
+        line6: $("#5").val(),
+    }
+    var value = JSON.parse(localStorage.getItem("value")) || [];
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
+})
+
+$("#15").on("click", function() {
+    userText = {
+        line7: $("#6").val(),
+    }
+    var value = JSON.parse(localStorage.getItem("value")) || [];
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
+})
+
+$("#17").on("click", function() {
+    userText = {
+        line9: $("#7").val(),
+    }
+    var value = JSON.parse(localStorage.getItem("value")) || [];
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
+})
+
+$("#18").on("click", function() {
+    userText = {
+        line8: $("#8").val(),
+    }
+    var value = JSON.parse(localStorage.getItem("value")) || [];
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(value));
+})
