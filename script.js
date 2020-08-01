@@ -34,9 +34,9 @@ for (var theHour = 9; theHour < 18; theHour++) {
 
     //Create text input box inside column two
     var textInput = $("<input>");
-    textInput.addClass("textarea");
-    textInput.addClass("form-control");
+    textInput.addClass("textarea form-control");
     textInput.attr("type", "text");
+    textInput.attr("id", "text-input")
 
     columnTwo.append(textInput);
 
@@ -45,12 +45,10 @@ for (var theHour = 9; theHour < 18; theHour++) {
 
     //create save button and push to local storage
     var saveButton = $("<button>");
-    saveButton.addClass("saveBtn i:hover");
-    saveButton.addClass("btn");
-    saveButton.addClass("far fa-save");
+    saveButton.addClass("btn saveBtn i:hover far fa-save");
 
     saveButton.on("click", function() {
-        var userText = textInput.val()
+        var userText = $("#text-Input").val()
         
         if (userText !== ""){
         var value = JSON.parse(localStorage.getItem("value")) || [];
@@ -72,16 +70,6 @@ for (var theHour = 9; theHour < 18; theHour++) {
     $(".container").append(plannerRow);
 }
 //end of for loop
-
-
-
-//     if (userText !== null){
-//     var storedPlans = localStorage.getItem("storedPlans") || [];
-//     storedPlans.push(userText);
-//     localStorage.setItem("storedPlans", JSON.stringify(storedPlans));
-//     }
-// });
-
 
 })
 

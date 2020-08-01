@@ -1,7 +1,12 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  margin: 0;
 }
 
 textarea{
@@ -20,10 +25,10 @@ textarea{
   border-radius: 0;
   border-bottom: 10px solid black;
 }
-
+/* 
 .description{
   white-space: pre-wrap;
-}
+} */
 
 .time-block{
   text-align: center;
@@ -31,7 +36,7 @@ textarea{
 }
 
 .row {
-  white-space: pre-wrap;
+  /* white-space: pre-wrap; */
   height: 80px;
   border-top: 1px solid white;;
 }
