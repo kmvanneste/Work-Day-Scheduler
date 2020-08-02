@@ -4,7 +4,7 @@ The Work-Day-Scheduler is a simple planner for people who are working a standard
 
 ##About
 
-As the day progresses so do the colors of the Work-Day-Scheduler.  The text box for the current hour of the day will be red.  For time that has already passed will be blue, and the future is green.
+As the day progresses so do the colors of the Work-Day-Scheduler.  The text box for the current hour of the day will be red.  For time that has already passed will be grey, and the future is green.
 
 ##Appearance
 
