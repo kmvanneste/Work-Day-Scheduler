@@ -9,9 +9,12 @@ var currentAmPm = moment().format('a');
 console.log(currentAmPm);
 console.log(currentTime);
 
+// //Carlo's local storage code
+// var setBoxes = localStorage.getItem("textAreaBox");
+
 //Create 9 rows
 for (var theHour = 9; theHour < 18; theHour++) {
-    index = theHour - 9;
+    var index = theHour - 9;
 
     var plannerRow = $("<div>");
     // plannerRow.attr("row-number", [theHour]);
@@ -21,7 +24,7 @@ for (var theHour = 9; theHour < 18; theHour++) {
     //Create 3 columns in each row
     var columnOne = $("<div>");
     columnOne.addClass("col-md-2");
-    columnOne.addClass("mx-auto timeCol");
+    columnOne.addClass("timeCol justify-content-center mt-1 mb-1");
 
     //Create Time Element
     var workTime = $("<p>");
@@ -51,40 +54,14 @@ for (var theHour = 9; theHour < 18; theHour++) {
     textInput.attr("id", index);
    
     //Changing Color boxes due to time of day
-    
-    if (displayHour === 12){            
-        if (displayHour === currentTime) {
-            textInput.addClass("present");
-        } else if (displayHour < currentTime && ampm !== currentAmPm) {
-            textInput.addClass("future");
-        } else {
-            textInput.addClass("past");
-        }
-    } else {
-
-    if (displayHour < currentTime && ampm === currentAmPm) {
-       
-        textInput.addClass("past");
-        
-    } else if (displayHour > currentTime && ampm !== currentAmPm ) {
-        
-        textInput.addClass("past");
-        
-    } else if (displayHour === currentTime && ampm === currentAmPm) {
- 
+    if ((parseInt(moment().format('h')) + 12) === theHour) {
         textInput.addClass("present");
-
-    } else if (displayHour > currentTime && ampm === currentAmPm) {
-       
+      } else if ((parseInt(moment().format('h')) + 12) > theHour) {
+        textInput.addClass("past");
+      } else {
         textInput.addClass("future");
-
-    } else if (displayHour < currentTime && ampm !== currentAmPm) {
-        
-        textInput.addClass("future");  
-    }
-}   
-
-
+      }
+    
     columnTwo.append(textInput);
 
     var columnThree = $("<div>");
@@ -92,7 +69,8 @@ for (var theHour = 9; theHour < 18; theHour++) {
 
     //create save button
     var saveButton = $("<button>");
-    saveButton.attr("id", theHour);
+    saveButton.attr("value", [theHour]);
+    saveButton.attr("id", [theHour]);
     saveButton.addClass("btn saveBtn i:hover far fa-save fa-2x")
     columnThree.append(saveButton);
 
@@ -103,8 +81,26 @@ for (var theHour = 9; theHour < 18; theHour++) {
     $(".container").append(plannerRow);
 }
 //end of for loop
+// var textAreaBox = [{9:[]},{10:[]},{11:[]},{12:[]},{13:[]},{14:[]},{15:[]},{16:[]},{17:[]},{18:[]}];
 
+// if (setBoxes !== null) {
+//     var parsedSaved = JSON.parse(setBoxes)
+//     textAreaBox = parsedSaved;
+//   };
 
+// for (var i = 0; i < textAreaBox.length; i++) {
+//     if (typeof textAreaBox[i] == "string") {
+//       $( "textarea[value="+ (i + 9) +"]" ).text(textAreaBox[i])
+//     }
+//   };
+
+// $(".btn").on("click", function(event) {
+//     event.preventDefault();
+//     var saveButton = $(this).attr("value")
+//     var textData = $( "textarea[value="+ saveButton +"]" ).val()
+//     textAreaBox[saveButton - 9] = textData;
+//     localData = localStorage.setItem("textAreaBox", JSON.stringify(textAreaBox))
+// })
 //Button Functions to push to local storage
 $("#9").on("click", function() {
     userText = {
@@ -172,5 +168,3 @@ $("#17").on("click", function() {
 })
 
 $("#0").val(JSON.parse(localStorage.getItem("0")));
-
-//change background color depending on time
