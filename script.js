@@ -81,6 +81,8 @@ for (var theHour = 9; theHour < 18; theHour++) {
     $(".container").append(plannerRow);
 }
 //end of for loop
+
+
 // var textAreaBox = [{9:[]},{10:[]},{11:[]},{12:[]},{13:[]},{14:[]},{15:[]},{16:[]},{17:[]},{18:[]}];
 
 // if (setBoxes !== null) {
@@ -101,11 +103,16 @@ for (var theHour = 9; theHour < 18; theHour++) {
 //     textAreaBox[saveButton - 9] = textData;
 //     localData = localStorage.setItem("textAreaBox", JSON.stringify(textAreaBox))
 // })
+
+
 //Button Functions to push to local storage
+var value = JSON.parse(localStorage.getItem("value")) || [];
+
 $("#9").on("click", function() {
     userText = {
         line1: $("#0").val()
     }
+    value.push(userText);
     localStorage.setItem("value", JSON.stringify(userText));
 })
 
@@ -113,6 +120,7 @@ $("#10").on("click", function() {
     userText = {
         line2: $("#1").val(),
     }
+    value.push(userText);
     localStorage.setItem("value", JSON.stringify(userText));
 })
 
@@ -120,51 +128,57 @@ $("#11").on("click", function() {
     userText = {
         line3: $("#2").val(),
     }
-    localStorage.setItem("value", JSON.stringify(value));
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(userText));
 })
 
 $("#12").on("click", function() {
     userText = {
         line4: $("#3").val(),
     }
-    localStorage.setItem("value", JSON.stringify(value));
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(userText));
 })
 
 $("#13").on("click", function() {
     userText = {
         line5: $("#4").val(),
     }
-    localStorage.setItem("value", JSON.stringify(value));
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(userText));
 })
 
 $("#14").on("click", function() {
     userText = {
         line6: $("#5").val(),
     }
-    localStorage.setItem("value", JSON.stringify(value));
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(userText));
 })
 
 $("#15").on("click", function() {
     userText = {
         line7: $("#6").val(),
     }
-    localStorage.setItem("value", JSON.stringify(value));
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(userText));
 })
 
 $("#16").on("click", function() {
     userText = {
         line8: $("#7").val(),
     }
-    localStorage.setItem("value", JSON.stringify(value));
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(userText));
 })
 
 $("#17").on("click", function() {
     userText = {
         line9: $("#8").val(),
     }
-    // var value = JSON.parse(localStorage.getItem("value")) || [];
-    // value.push(userText);
-    localStorage.setItem("value", JSON.stringify(value));
+    
+    value.push(userText);
+    localStorage.setItem("value", JSON.stringify(userText));
 })
 
-$("#0").val(JSON.parse(localStorage.getItem("0")));
+// $("#0").val(JSON.parse(localStorage.getItem("0")));
