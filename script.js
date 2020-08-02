@@ -51,27 +51,39 @@ for (var theHour = 9; theHour < 18; theHour++) {
     textInput.attr("id", index);
    
     //Changing Color boxes due to time of day
-    var colorTime = currentTime + 12;
-    var colorTime = parseInt(colorTime);
-    console.log(currentTime);
-    console.log(displayHour);
-    console.log(colorTime);
-    if (currentTime < displayHour && ampm === "am") {
-        console.log("green");
-        textInput.addClass("future");
-    } else if (currentTime === displayHour) {
-        console.log("red");
-        textInput.addClass("present");
-    } else if (currentTime === displayHour) {
-        console.log("red");
-        textInput.addClass("present");
-    } else if (currentTime === displayHour) {
-        console.log("red");
-        textInput.addClass("present");
+    
+    if (displayHour === 12){            
+        if (displayHour === currentTime) {
+            textInput.addClass("present");
+        } else if (displayHour < currentTime && ampm !== currentAmPm) {
+            textInput.addClass("future");
+        } else {
+            textInput.addClass("past");
+        }
     } else {
+
+    if (displayHour < currentTime && ampm === currentAmPm) {
+       
         textInput.addClass("past");
-        console.log("blue");
+        
+    } else if (displayHour > currentTime && ampm !== currentAmPm ) {
+        
+        textInput.addClass("past");
+        
+    } else if (displayHour === currentTime && ampm === currentAmPm) {
+ 
+        textInput.addClass("present");
+
+    } else if (displayHour > currentTime && ampm === currentAmPm) {
+       
+        textInput.addClass("future");
+
+    } else if (displayHour < currentTime && ampm !== currentAmPm) {
+        
+        textInput.addClass("future");  
     }
+}   
+
 
     columnTwo.append(textInput);
 
